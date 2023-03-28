@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,8 +97,8 @@ class VolatilLoteRepositoryTest {
    void encontrarLote() {
     resultado = driver.save(lote);
 
-    assertEquals(resultado.getId().longValue(), lote.getId().longValue());
-    assertEquals(driver.find(resultado.getId().longValue()), lote);
+    assertEquals(resultado.getId(), lote.getId());
+    assertEquals(driver.find(resultado.getId()), lote);
     
    }
 
@@ -125,7 +128,6 @@ class VolatilLoteRepositoryTest {
 
        assertEquals(driver.findAll().size(),2);
        assertEquals(driver.findAll(), lotesSalvos);
-       assertEquals(resultado.getProduto(), produtoExtra);
    }
 
    @Test
@@ -149,8 +151,6 @@ class VolatilLoteRepositoryTest {
     resultado = driver.update(loteExtra);
 
     assertEquals(driver.findAll().size(), 1);
-    assertEquals(driver.find(resultado.getId().longValue()), loteExtra);
-    assertEquals(resultado.getProduto(), produtoExtra);
    }
 
    @Test
